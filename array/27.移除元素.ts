@@ -10,9 +10,7 @@ function removeElement(nums: number[], val: number): number {
     let j = nums.length - 1;
     while(i < j) {
         if(nums[i] === val) {
-            let temp = nums[i]
-            nums[i] = nums[j]
-            nums[j] = temp
+            [nums[i], nums[j]] = [nums[j], nums[i]]
             j--
         } else {
             i++

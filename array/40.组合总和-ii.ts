@@ -5,7 +5,13 @@
  */
 
 // @lc code=start
-function backtrack(list, tempList, nums, remain, start) {
+function backtrack(
+  list: number[][],
+  tempList: number[],
+  nums: number[],
+  remain: number,
+  start: number
+) {
   if (remain < 0) return;
   else if (remain === 0) return list.push([...tempList]);
   for (let i = start; i < nums.length; i++) {
@@ -23,7 +29,7 @@ function backtrack(list, tempList, nums, remain, start) {
  * @param {number} target
  * @return {number[][]}
  */
-function combinationSum2(candidates, target) {
+function combinationSum2(candidates: number[], target: number): number[][] {
   const list = [];
   backtrack(
     list,

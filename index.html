@@ -11,23 +11,30 @@
 </body>
 </html>
 <script>
-    function isIsomorphic(s, t) {
-    let map1 = {};
-    let map2 = {};
-    let len1 = s.length;
-    let len2 = t.length;
-    if(len1 !== len2) return false;
-    for(let i = 0; i < len1; i++) {
-        if(!map1[s[i]]) {
-            if(map2[t[i]]) return false
-            console.log(map2[t[i]])
-            map1[s[i]] = t[i];
-            map2[t[i]] = s[i];
-        } else if(map1[s[i]] !== t[i]) {
-            return false;
+    function frequencySort(s) {
+    let res = [];
+    let map = new Map();
+    for(let i = 0, len = s.length; i < len; i++) {
+        if(map.has(s[i])) {
+            map.set(s[i], map.get(s[i]) + 1)
+        } else {
+            map.set(s[i], 1)
         }
     }
-    return true;
+    let arr = [];
+    map.forEach((freq, char) => {
+        if(arr[freq]) {
+            arr[freq].push(char);
+        } else {
+            arr[freq] = [char];
+        }
+    });
+    for(let i = arr.length - 1; i > 0; i--) {
+        arr[i].forEach((item) => {
+            res.push(item)
+        })
+    }
+    return res.join('');
 };
-isIsomorphic("badc", "baba")
+frequencySort("tree")
 </script>

@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-    function groupAnagrams(strs) {
+/*
+ * @lc app=leetcode.cn id=49 lang=typescript
+ *
+ * [49] 字母异位词分组
+ */
+
+// @lc code=start
+function groupAnagrams(strs: string[]): string[][] {
     let map = new Map();
     let res = [];
     for(let i = 0, len = strs.length; i < len; i++) {
@@ -28,5 +22,5 @@
     })
     return res;
 };
-groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
-</script>
+// @lc code=end
+

@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-    function evalRPN(tokens) {
+/*
+ * @lc app=leetcode.cn id=150 lang=typescript
+ *
+ * [150] 逆波兰表达式求值
+ */
+
+// @lc code=start
+function evalRPN(tokens: string[]): number {
   let stack = [];
   let map = {
     "+": true,
@@ -40,12 +34,11 @@
         default:
             break;
       }
-      stack.push(~~num3);
+      stack.push(Math.floor(num3));
     } else {
       stack.push(tokens[i]);
     }
   }
   return stack[0];
 }
-evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"])
-</script>
+// @lc code=end

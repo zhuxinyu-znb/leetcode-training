@@ -1,0 +1,30 @@
+/*
+ * @lc app=leetcode.cn id=230 lang=typescript
+ *
+ * [230] 二叉搜索树中第K小的元素
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+ function kthSmallest(root, k) {
+    const arr = helper2(root);
+    return arr[k - 1]
+};
+// @lc code=end
+
+function helper2(root) {
+    return root ? [...helper2(root.left), root.val, ...helper2(root.right)]: []
+}

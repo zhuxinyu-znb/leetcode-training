@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-   var permute = function(nums) {
+/*
+ * @lc app=leetcode.cn id=46 lang=typescript
+ *
+ * [46] 全排列
+ */
+
+// @lc code=start
+function permute(nums: number[]): number[][] {
     let res = [];
     let temp = [];
     let used = new Array(nums.length).fill(false);
     let fn = (nums, index, p) => {
         if(index === nums.length) {
-            res.push(p);
+            res.push(p.slice(0));
             return;
         }
         for(let i = 0, len = nums.length; i < len; i++) {
@@ -34,5 +28,5 @@
     fn(nums, 0, temp);
     return res;
 };
-permute([1,2,3])
-</script>
+// @lc code=end
+

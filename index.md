@@ -145,7 +145,111 @@ const deepClone = function (obj, hash = new WeakMap()) {
 
 ## 函数防抖
 
+```javascript
+// 简单版
+function debounce(func, wait) {
+  let timeout;
+  return function () {
+    let context = this;
+    let args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(context, args);
+    }, wait);
+  };
+}
+
+// 完整版
+function debounce(func, wait, immediate) {
+  let timeout, result;
+
+  let debounced = function () {
+    let context = this;
+    let args = arguments;
+
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      // 如果已经执行过，不再执行
+      let callNow = !timeout;
+      timeout = setTimeout(function () {
+        timeout = null;
+      }, wait);
+      if (callNow) result = func.apply(context, args);
+    } else {
+      timeout = setTimeout(function () {
+        func.apply(context, args);
+      }, wait);
+    }
+    return result;
+  };
+
+  debounced.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+
+  return debounced;
+}
+```
+
 ## 函数节流
+
+```javascript
+// 简单版
+function throttle(func, wait) {
+  let context, args;
+  let previous = 0;
+  return function () {
+    let now = new Date();
+    context = this;
+    args = arguments;
+    if (now - previous > wait) {
+      func.apply(context, args);
+      previous = now;
+    }
+  };
+}
+
+// 完整版
+function throttle(func, wait, options) {
+  let timeout, context, args, result;
+  let previous = 0;
+  if (!options) options = {};
+
+  let later = function () {
+    previous = options.leading === false ? 0 : new Date().getTime();
+    timeout = null;
+    func.apply(context, args);
+    if (!timeout) context = args = null;
+  };
+
+  let throttled = function () {
+    let now = new Date().getTime();
+    if (!previous && options.leading === false) previous = now;
+    let remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0 || remaining > wait) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      previous = now;
+      func.apply(context, args);
+      if (!timeout) context = args = null;
+    } else if (!timeout && options.trailing !== false) {
+      timeout = setTimeout(later, remaining);
+    }
+  };
+
+  throttled.cancel = function () {
+    clearTimeout(timeout);
+    previous = 0;
+    timeout = null;
+  };
+  return throttled;
+}
+```
 
 ## 函数柯里化
 
@@ -197,4 +301,4 @@ const deepClone = function (obj, hash = new WeakMap()) {
 
 ## Promise.any
 
-## 
+##

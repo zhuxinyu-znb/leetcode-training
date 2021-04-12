@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-   var exist = function(board, word) {
+/*
+ * @lc app=leetcode.cn id=79 lang=typescript
+ *
+ * [79] 单词搜索
+ */
+
+// @lc code=start
+function exist(board: string[][], word: string): boolean {
     if(!board || board.length === 0) return false;
     const m = board.length;
     const n = board[0].length;
     const isArea = (x, y) => {
-        return x >= 0 && x < n && y >= 0 && y < m
+        return x >= 0 && x < m && y >= 0 && y < n
     }
     const dp = [[0, 1], [1, 0], [0, -1], [-1, 0]]
     const visited = new Array(m).fill(0).map((_) => new Array(n).fill(false));
@@ -49,5 +43,6 @@
     }
     return false;
 };
-exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED")
-</script>
+
+// @lc code=end
+

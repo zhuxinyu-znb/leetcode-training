@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-   var rob = function(nums) {
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var rob = function(nums) {
     if(!nums || nums.length === 0) return 0;
     const len = nums.length;
     if(len === 1) return nums[0]
@@ -24,10 +15,8 @@ function robTemp(nums, start, end) {
     let dp = new Array(end - start + 1).fill(0)
     dp[0] = nums[start];
     dp[1] = Math.max(nums[start], nums[start + 1])
-    for(let i = start + 2; i <= end; i++) {
-        dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
+    for(let i = 2; i <= end; i++) {
+        dp[i] = Math.max(dp[i - 2] + nums[start + i], dp[i - 1])
     }
     return dp[end - start]
 }
-rob([1,2,1,1])
-</script>
